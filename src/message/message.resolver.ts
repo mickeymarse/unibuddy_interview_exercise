@@ -123,13 +123,14 @@ export class MessageResolver {
     );
   }
 
+  // src/message/message.resolver.ts:131:6 - error TS2355: A function whose declared type is neither 'void' nor 'any' must return a value.
   @Mutation(() => ChatMessage)
   @UseGuards(GqlAuthGuard)
   async likeConversationMessage(
     @Args('likeMessageDto') likeMessageDto: LikeMessageDto,
     @AuthenticatedUser() authenticatedUser: IAuthenticatedUser,
   ): Promise<ChatMessage> {
-    await this.messageLogic.like(likeMessageDto, authenticatedUser);
+    return await this.messageLogic.like(likeMessageDto, authenticatedUser); // This method wasn't being returned
   }
 
   @Mutation(() => ChatMessage)
