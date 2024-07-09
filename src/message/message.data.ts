@@ -42,7 +42,6 @@ export class MessageData {
     return chatMessageToObject(message);
   }
 
-
   async getChatConversationMessages(
     data: GetMessageDto,
   ): Promise<PaginatedChatMessages> {
@@ -87,9 +86,27 @@ export class MessageData {
     return { messages: result.map(chatMessageToObject), hasMore };
   }
 
+  // FAIL  message/message.data.spec.ts
+  // ● MessageData › delete › successfully marks a message as deleted
+  //   expect(received).toEqual(expected) // deep equality
+  //   Expected: true
+  //   Received: undefined
   async delete(messageId: ObjectID): Promise<ChatMessage> {
-    // TODO allow a message to be marked as deleted
-    return new ChatMessage() // Minimum to pass ts checks -replace this
+    // After having inspected message.entity.ts, I've simply adapted the resolve function
+    // However, I cannot understand why this trigger ChatConversation type to be removed from the GraphQL schema
+    const filterBy = { _id: messageId };
+    const updateProperty = { deleted: true };
+    const deletedMessage = await this.chatMessageModel.findOneAndUpdate(
+      filterBy,
+      updateProperty,
+      {
+        new: true,
+        returnOriginal: false,
+      },
+    );
+    if (!deletedMessage)
+      throw new Error('The message to delete does not exist');
+    return chatMessageToObject(deletedMessage);
   }
 
   async resolve(messageId: ObjectID): Promise<ChatMessage> {
