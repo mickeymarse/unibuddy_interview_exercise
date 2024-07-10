@@ -118,6 +118,10 @@ export class MessageDto {
 
   @Field(() => RichContentDto, { nullable: true })
   richContent?: RichContentDto;
+
+  // Added tags to Data Transfer Object for validation
+  @Field(() => [String], { nullable: true })
+  tags?: string[];
 }
 
 // TODO Min - Max on limit

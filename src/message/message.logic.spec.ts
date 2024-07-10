@@ -319,6 +319,8 @@ describe('MessageLogic', () => {
       };
     }
 
+    // We would need to add a test here to for the new tags logic
+
     getChatConversationMessages(
       data: GetMessageDto,
     ): Promise<PaginatedChatMessages> {
@@ -549,7 +551,6 @@ describe('MessageLogic', () => {
   class MockConversationChannel {
     send = jest.fn();
   }
-
 
   class MockUserBlocksLogic implements IUserBlocksLogic {
     getBlockedUsers(

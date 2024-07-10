@@ -375,4 +375,6 @@ export class MessageData {
 
     return chatMessageToObject(updatedResult);
   }
+
+  // Here we will have to add the methods to interact directly iwht the database
 }

@@ -116,6 +116,8 @@ describe('MessageResolver', () => {
       return Promise.resolve(chatMessage);
     }
 
+    //Will need to implement tests for the updated GraphQL Query and Mutations for tags
+
     getChatConversationMessages(
       getMessageDto: GetMessageDto,
       authenticatedUser?: IAuthenticatedUser,

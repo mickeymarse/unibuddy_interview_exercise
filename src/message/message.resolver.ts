@@ -170,6 +170,8 @@ export class MessageResolver {
   text(@Parent() message: ChatMessage): string {
     return this.safeguardingService.clean(message.text);
   }
+
+  // Need to implement methods to handle adding updating and getting messages by tag via GraphQL
 }
 
 @Resolver(() => RichMessageContent)

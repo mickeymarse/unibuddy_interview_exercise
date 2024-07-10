@@ -148,6 +148,10 @@ export class ChatMessage {
 
   @Field({ defaultValue: false, nullable: true })
   isSenderBlocked?: boolean;
+
+  // Added tag field to the ChatMessage entity
+  @Field(() => [String], { nullable: true })
+  tags?: string[];
 }
 
 /***
